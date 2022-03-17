@@ -5,7 +5,7 @@ public class Data {
     private String note;
     private String date;
     private String id;
-    private int urgency;
+    private String urgency;
     private int done;
 
     public Data()
@@ -13,7 +13,7 @@ public class Data {
 
     }
 
-    public Data(String title, String note, String date, String id, int urgency , int done) {
+    public Data(String title, String note, String date, String id, String urgency , int done) {
         this.title = title;
         this.note = note;
         this.date = date;
@@ -62,11 +62,11 @@ public class Data {
         this.id = id;
     }
 
-    public int getUrgency() {
+    public String getUrgency() {
         return urgency;
     }
 
-    public void setUrgency(int urgency) {
+    public void setUrgency(String urgency) {
         this.urgency = urgency;
     }
 }
