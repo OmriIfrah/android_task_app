@@ -10,17 +10,31 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.example.taskapp.Model.Data;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 
 public class HomeActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private FloatingActionButton fabBtn;
+    // fire base
+    //private FirebaseDatabase dataBase = FirebaseDatabase.getInstance();
+    private DatabaseReference mDataBase;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +44,13 @@ public class HomeActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("O&S Task App");
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        String user_id = mUser.getUid();
+
+        FirebaseDatabase dataBase = FirebaseDatabase.getInstance();
+        mDataBase = dataBase.getReference().child("TaskNote").child(user_id);
 
         fabBtn = findViewById(R.id.fab_btn);
 
@@ -57,7 +78,6 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String m_title = title.getText().toString().trim();
                         String m_note = note.getText().toString().trim();
-                        rg.getCheckedRadioButtonId();
 
                         if(TextUtils.isEmpty(m_title))
                         {
@@ -69,25 +89,14 @@ public class HomeActivity extends AppCompatActivity {
                             note.setError("Required Filed");
                             return;
                         }
-                        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(RadioGroup radioGroup,
-                                                         int radioButtonID) {
-                                switch(radioButtonID) {
-                                    case R.id.low:
-                                        listItem.setAnswerID(1);
-                                        break;
-                                    case R.id.medium:
-                                        listItem.setAnswerID(2);
-                                        break;
-                                    case R.id.high:
-                                        listItem.setAnswerID(2);
-                                        break;
-                                }
-                            }
-                        });
+                        String id = mDataBase.push().getKey();
+                        String m_date = DateFormat.getDateInstance().format(new Date());
+                        Data data = new Data(m_title, m_note, id, m_date,0,0);
 
+                        mDataBase.child(id).setValue(data);
+                        Toast.makeText(getApplicationContext(),"Data Insert",Toast.LENGTH_SHORT).show();
 
+                        dialog.dismiss();
                     }
                 });
                 dialog.show();
