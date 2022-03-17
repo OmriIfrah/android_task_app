@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Task App</string>
+    <string name="email">Email:</string>
+    <string name="password">Password:</string>
+    <string name="login">Log in</string>
+    <string name="signup">Don\'t have account? Sign up here</string>
+
+</resources>
