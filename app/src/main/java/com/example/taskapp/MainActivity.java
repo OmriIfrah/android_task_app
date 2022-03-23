@@ -1,4 +1,5 @@
 package com.example.taskapp;
+//Omri and Shalev task app
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,13 +19,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+
 public class MainActivity extends AppCompatActivity {
 
+    //fields
     private TextView sign_up;
     private EditText email;
     private EditText pass;
     private Button login_btn;
 
+
+    //firebase
     private FirebaseAuth auth;
     private ProgressDialog dialog;
 

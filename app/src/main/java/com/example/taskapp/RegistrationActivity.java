@@ -1,5 +1,5 @@
 package com.example.taskapp;
-
+//Omri and Shalev task app
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 

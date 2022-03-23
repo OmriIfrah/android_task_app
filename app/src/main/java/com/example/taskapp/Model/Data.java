@@ -6,20 +6,18 @@ public class Data {
     private String date;
     private String id;
     private String urgency;
-    private int done;
 
     public Data()
     {
 
     }
 
-    public Data(String title, String note, String date, String id, String urgency , int done) {
+    public Data(String title, String note, String date, String id, String urgency) {
         this.title = title;
         this.note = note;
         this.date = date;
         this.id = id;
         this.urgency = urgency;
-        this.done = done;
     }
 
     public String getTitle() {
@@ -38,13 +36,6 @@ public class Data {
         this.note = note;
     }
 
-    public int getDone() {
-        return done;
-    }
-
-    public void setDone(int done) {
-        this.done = done;
-    }
 
     public String getDate() {
         return date;
