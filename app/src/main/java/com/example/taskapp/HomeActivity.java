@@ -38,15 +38,11 @@ import com.google.firebase.database.Query;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-    private FloatingActionButton fabBtn;
-    // fire base
-    private FirebaseDatabase dataBase;
-    private DatabaseReference myRef;
     private DatabaseReference mDataBase;
     private FirebaseAuth mAuth;
     private Query query;
@@ -56,9 +52,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private EditText titleUpd;
     private EditText noteUpd;
-    private EditText urgUpd;
-    private Button btnDel;
-    private Button btnUdp;
 
     private String title;
     private String note;
@@ -72,15 +65,17 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        toolbar = findViewById(R.id.toolbar_home);
+        Toolbar toolbar = findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("O&S Task App");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("O&S Task App");
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
+        assert mUser != null;
         String user_id = mUser.getUid();
 
-        dataBase = FirebaseDatabase.getInstance();
+        // fire base
+        FirebaseDatabase dataBase = FirebaseDatabase.getInstance();
         //myRef = dataBase.getReference("https://task-app-9dfdd-default-rtdb.firebaseio.com/");
         mDataBase = dataBase.getReference().child("TaskNote").child(user_id);
         mDataBase.keepSynced(true);
@@ -101,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
 
-        fabBtn = findViewById(R.id.fab_btn);
+        FloatingActionButton fabBtn = findViewById(R.id.fab_btn);
 
         fabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,8 +108,6 @@ public class HomeActivity extends AppCompatActivity {
                 View my_view = inflater.inflate(R.layout.custom_input, null);
 
                 my_dialog.setView(my_view);
-
-
 
                 AlertDialog dialog = my_dialog.create();
 
@@ -128,16 +121,16 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String m_title = title.getText().toString().trim();
                         String m_note = note.getText().toString().trim();
-                        String urgency = "low";
+                        String urgency;
                         int selectedId = radioGroup.getCheckedRadioButtonId();
 
                         if (selectedId != -1) {
-                            RadioButton radioButton = (RadioButton) my_view.findViewById(selectedId);
+                            RadioButton radioButton = my_view.findViewById(selectedId);
                              urgency = radioButton.getText().toString();
                         }
                         else
                         {
-                            RadioButton rb = (RadioButton) my_view.findViewById(R.id.high);
+                            RadioButton rb = my_view.findViewById(R.id.high);
                             rb.setError("Required Filed");
                             return;
                         }
@@ -157,6 +150,7 @@ public class HomeActivity extends AppCompatActivity {
                         String m_date = DateFormat.getDateInstance().format(new Date());
                         Data data = new Data(m_title, m_note, m_date, id, urgency);
 
+                        assert id != null;
                         mDataBase.child(id).setValue(data);
                         Toast.makeText(getApplicationContext(),"Data Insert",Toast.LENGTH_SHORT).show();
 
@@ -288,14 +282,14 @@ public class HomeActivity extends AppCompatActivity {
        noteUpd.setText(note);
        noteUpd.setSelection(note.length());
 
-       btnDel = myView.findViewById(R.id.del_btn);
-       btnUdp = myView.findViewById(R.id.upd_btn);
+       Button btnDel = myView.findViewById(R.id.del_btn);
+       Button btnUdp = myView.findViewById(R.id.upd_btn);
        RadioGroup radioGroupUpd = myView.findViewById(R.id.upd_radiogroup);
        if (urg.contains("high"))
            radioGroupUpd.check(R.id.upd_high);
        else if (urg.contains("medium"))
            radioGroupUpd.check(R.id.upd_medium);
-       else if (urg.contains("high"))
+       else if (urg.contains("low"))
            radioGroupUpd.check(R.id.upd_low);
 
 
@@ -308,12 +302,12 @@ public class HomeActivity extends AppCompatActivity {
                int selectedId = radioGroupUpd.getCheckedRadioButtonId();
 
                if (selectedId != -1) {
-                   RadioButton radioButton = (RadioButton) myView.findViewById(selectedId);
+                   RadioButton radioButton = myView.findViewById(selectedId);
                    urg = radioButton.getText().toString();
                }
                else
                {
-                   RadioButton rb = (RadioButton) myView.findViewById(R.id.upd_high);
+                   RadioButton rb = myView.findViewById(R.id.upd_high);
                    rb.setError("Required Filed");
                    return;
                }
@@ -355,13 +349,12 @@ public class HomeActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.logout:
-                mAuth.signOut();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                break;
+        if (item.getItemId() == R.id.logout) {
+            mAuth.signOut();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

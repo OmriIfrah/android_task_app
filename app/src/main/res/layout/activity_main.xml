@@ -1,69 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:background="@drawable/task_background"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:gravity="center"
         android:text="@string/login"
-        android:layout_margin="10dp"
-        android:textColor="@android:color/white"
-        android:textAppearance="?android:textAppearanceLarge" />
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@android:color/white" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:inputType="textEmailAddress"
-        android:hint="@string/email"
-        android:background="@drawable/edit_background"
-        android:padding="10dp"
-        android:autofillHints="email"
         android:id="@+id/email_login"
-        />
-
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:inputType="textPassword"
-        android:hint="@string/password"
+        android:autofillHints="email"
         android:background="@drawable/edit_background"
-        android:padding="10dp"
-        android:autofillHints="pass"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp" />
+
+    <EditText
         android:id="@+id/password_login"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autofillHints="pass"
+        android:background="@drawable/edit_background"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:backgroundTint="@color/btn_purple"
         android:padding="10dp"
-        android:backgroundTint="@color/dark_green"
         android:text="@string/login"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@android:color/white" />
 
 
     <TextView
+        android:id="@+id/signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/signup"
         android:autofillHints="signup"
         android:gravity="center"
         android:padding="10dp"
-        android:textColor="@android:color/white"
-        android:id="@+id/signup"
+        android:text="@string/signup"
         android:textAppearance="?android:textAppearanceSmall"
-        />
+        android:textColor="@android:color/white" />
 
 
 </LinearLayout>

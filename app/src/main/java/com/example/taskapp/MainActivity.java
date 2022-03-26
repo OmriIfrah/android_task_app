@@ -22,11 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    //fields
-    private TextView sign_up;
     private EditText email;
     private EditText pass;
-    private Button login_btn;
 
 
     //firebase
@@ -47,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
         dialog = new ProgressDialog(this);
 
-        sign_up = findViewById(R.id.signup);
+        //fields
+        TextView sign_up = findViewById(R.id.signup);
         email = findViewById(R.id.email_login);
         pass = findViewById(R.id.password_login);
-        login_btn = findViewById(R.id.login_btn);
+        Button login_btn = findViewById(R.id.login_btn);
 
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override

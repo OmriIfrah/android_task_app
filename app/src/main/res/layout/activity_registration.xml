@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/background"
+    android:background="@drawable/task_background"
     tools:context=".RegistrationActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Registration"
+                android:text="@string/registration"
                 android:layout_margin="10dp"
                 android:textColor="@android:color/white"
                 android:textAppearance="?android:textAppearanceLarge" />
@@ -58,9 +58,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:backgroundTint="@color/dark_green"
+                android:backgroundTint="@color/btn_purple"
                 android:padding="10dp"
-                android:text="Registration"
+                android:text="@string/registration"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@android:color/white" />
 
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Already have account? Login here"
+                android:text="@string/already_have_account_login_here"
                 android:gravity="center"
                 android:padding="10dp"
                 android:textColor="@android:color/white"

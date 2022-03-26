@@ -31,13 +31,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:backgroundTint="#99FF99"
+            android:backgroundTint="@color/btn_purple"
             android:clickable="true"
             android:elevation="6dp"
             android:src="@drawable/fab"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/add_new_note"
+            android:focusable="true" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
