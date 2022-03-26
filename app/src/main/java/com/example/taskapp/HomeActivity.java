@@ -82,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
 
         query = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("TaskNote").child(user_id)
+                .child("TaskNote").child(user_id).orderByChild("date")
                 .limitToLast(50);
 
         recyclerView = findViewById(R.id.recycler);
